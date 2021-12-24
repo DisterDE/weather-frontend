@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Weather in ' + ${result.name}">Weather</title>
+</head>
+<body>
+<p><img th:src="${result.weather.icon}"></p>
+<p><b>City:</b> <span th:text="${result.name}"></span></p>
+<p><b>Temp:</b> <span th:text="${result.main.temp}"></span></p>
+<p><b>Description:</b> <span th:text="${result.weather.main}"></span></p>
+<p><b>Pressure:</b> <span th:text="${result.main.pressure}"></span></p>
+<p><b>Humidity:</b> <span th:text="${result.main.humidity}"></span></p>
+
+<form th:action="@{/}" method="get">
+    <button type="submit">Back</button>
+</form>
+
+</body>
+</html>

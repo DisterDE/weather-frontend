@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Weather ERROR: '+ ${city}"></title>
+</head>
+<body>
+<h2><span th:text="'City doesn\'t exist: ' + ${city}"></span></h2>
+
+<form th:action="@{/}" method="get">
+    <button type="submit">Back</button>
+</form>
+</body>
+</html>

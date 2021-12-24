@@ -1,0 +1,10 @@
+server:
+  servlet:
+    context-path: /weather
+
+logging:
+  level:
+    root: info
+
+backend:
+  url: http://weather-app:8080/weather/get/
