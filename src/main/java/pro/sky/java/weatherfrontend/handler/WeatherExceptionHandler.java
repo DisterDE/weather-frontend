@@ -11,6 +11,7 @@ public class WeatherExceptionHandler {
     @ExceptionHandler(CityNotFoundException.class)
     public String cityNotFoundException(CityNotFoundException e, Model model) {
         model.addAttribute("city", e.getCity());
+        e.printStackTrace();
         return "error";
     }
 }
