@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pro.sky.java.weatherfrontend.service.WeatherServiceImpl;
+import pro.sky.java.weatherfrontend.service.WeatherService;
 
 @Controller
 public class WeatherController {
 
-    private final WeatherServiceImpl weatherService;
+    private final WeatherService weatherService;
 
-    public WeatherController(WeatherServiceImpl weatherService) {
+    public WeatherController(WeatherService weatherService) {
         this.weatherService = weatherService;
     }
 
