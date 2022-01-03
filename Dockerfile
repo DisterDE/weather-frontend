@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-openjdk-alpine:11
+FROM amazoncorretto:11
 
 WORKDIR /app
 
