@@ -1,10 +1,9 @@
 server:
-  servlet:
-    context-path: /weather
+  port: 80
 
-logging:
-  level:
-    root: info
+spring:
+  webflux:
+    base-path: /weather
 
 backend:
-  url: http://weather-app:8080/weather/get/
+  url: http://localhost:8080/weather/get/
