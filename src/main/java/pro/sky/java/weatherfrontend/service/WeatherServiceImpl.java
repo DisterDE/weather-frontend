@@ -1,30 +1,31 @@
 package pro.sky.java.weatherfrontend.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import pro.sky.java.weatherfrontend.domain.WeatherDto;
 import pro.sky.java.weatherfrontend.exception.CityNotFoundException;
+import reactor.core.publisher.Mono;
 
+@Slf4j
 @Service
 public class WeatherServiceImpl implements WeatherService {
-
-    private final RestTemplate restTemplate;
 
     @Value("${backend.url}")
     private String url;
 
-    public WeatherServiceImpl(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
     @Override
-    public WeatherDto get(String city) {
-        try {
-            return restTemplate.getForObject(url + city, WeatherDto.class);
-        } catch (RestClientException e) {
-            throw new CityNotFoundException(city, e);
-        }
+    public Mono<WeatherDto> get(String city) {
+        log.info("Trying to get a forecast for {}", city);
+        return WebClient.create()
+                .get()
+                .uri(url + city)
+                .retrieve()
+                .bodyToMono(WeatherDto.class)
+                .doOnSuccess(weatherDto -> log.info("Weather was received: {}", weatherDto))
+                .doOnError(e -> {
+                    throw new CityNotFoundException(city, e);
+                });
     }
 }
