@@ -9,8 +9,9 @@ import pro.sky.java.weatherfrontend.exception.CityNotFoundException
 class WeatherExceptionHandler {
     @ExceptionHandler(CityNotFoundException::class)
     fun cityNotFoundException(e: CityNotFoundException, model: Model): String {
-        model.addAttribute("city", e.city)
-        e.printStackTrace()
-        return "error"
+        return "error".also {
+            model.addAttribute("city", e.city)
+            e.printStackTrace()
+        }
     }
 }

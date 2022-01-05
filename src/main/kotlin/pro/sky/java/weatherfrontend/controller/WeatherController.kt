@@ -5,7 +5,6 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import pro.sky.java.weatherfrontend.service.WeatherService
-import reactor.core.publisher.Mono
 
 @Controller
 class WeatherController(
@@ -17,9 +16,9 @@ class WeatherController(
     }
 
     @GetMapping("/get")
-    fun getWeather(@RequestParam city: String, model: Model): Mono<String> {
-        return weatherService.get(city)
-            .doOnSuccess { w -> model.addAttribute("result", w) }
-            .thenReturn("weather")
+    suspend fun getWeather(@RequestParam city: String, model: Model): String {
+        return "weather".also {
+            model.addAttribute("result", weatherService.get(city))
+        }
     }
 }
