@@ -6,4 +6,4 @@ spring:
     base-path: /weather
 
 backend:
-  url: http://localhost:8080/weather/get/
+  url: http://weather-app:8080/weather/get/
